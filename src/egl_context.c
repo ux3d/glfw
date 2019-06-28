@@ -32,8 +32,10 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#if defined(_GLFW_WAYLAND)
 // NN: Required for an EGL library, which uses GLIB.
 #include <glib.h>
+#endif
 
 // Return a description of the specified EGL error
 //
