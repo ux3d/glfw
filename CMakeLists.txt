@@ -279,10 +279,13 @@ if (_GLFW_WAYLAND)
     find_package(WaylandScanner REQUIRED)
     find_package(WaylandProtocols 1.1 REQUIRED)
 
+    find_package(PkgConfig REQUIRED)
+    pkg_search_module(GLIB REQUIRED glib-2.0)
+
     list(APPEND glfw_PKG_DEPS "wayland-egl")
 
-    list(APPEND glfw_INCLUDE_DIRS "${Wayland_INCLUDE_DIR}")
-    list(APPEND glfw_LIBRARIES "${Wayland_LIBRARIES}" "${CMAKE_THREAD_LIBS_INIT}")
+    list(APPEND glfw_INCLUDE_DIRS "${Wayland_INCLUDE_DIRS}" "${GLIB_INCLUDE_DIRS}")
+    list(APPEND glfw_LIBRARIES "${Wayland_LIBRARIES}" "${CMAKE_THREAD_LIBS_INIT}" "${GLIB_LDFLAGS}")
 
     find_package(XKBCommon REQUIRED)
     list(APPEND glfw_PKG_DEPS "xkbcommon")

@@ -32,6 +32,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+// NN: Required for an EGL library, which uses GLIB.
+#include <glib.h>
 
 // Return a description of the specified EGL error
 //
@@ -584,7 +586,14 @@ GLFWbool _glfwCreateContextEGL(_GLFWwindow* window,
 
     // Load the appropriate client library
     {
-        int i;
+    	// NN: Required for an EGL library, which uses GLIB.
+#if defined(_GLFW_WAYLAND) && !defined(_GLFW_WIN32) && defined(_GLFW_COCOA) 
+    	gchar dest[1];
+    	gchar src[1];
+    	g_strlcat(dest, src, 1);
+#endif
+
+    	int i;
         const char** sonames;
         const char* es1sonames[] =
         {

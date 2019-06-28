@@ -26,6 +26,7 @@
 #define VK_NO_PROTOTYPES
 #include <vulkan/vulkan.h>
 #include <glad/glad.h>
+#define GLFW_INCLUDE_NONE
 #include <GLFW/glfw3.h>
 
 #include <stdio.h>
@@ -617,7 +618,8 @@ int main(int argc, char** argv)
 
     print_version();
 
-    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+    // NN
+    //glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
     window = glfwCreateWindow(200, 200, "Version", NULL, NULL);
     if (!window)
@@ -893,6 +895,21 @@ int main(int argc, char** argv)
         vkDestroyInstance(instance, NULL);
     }
 
+    // NN
+    printf("Starting loop\n");
+    while (!glfwWindowShouldClose(window))
+    {
+        /* Render here */
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        /* Swap front and back buffers */
+        glfwSwapBuffers(window);
+
+        /* Poll for and process events */
+        glfwPollEvents();
+    }
+    //
+        
     glfwTerminate();
     exit(EXIT_SUCCESS);
 }
